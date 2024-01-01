@@ -21,7 +21,6 @@ const VideoDecode = () => {
         if (pScannerRef.current.isContextDestroyed()) return;
         pScannerRef.current.onUniqueRead = (txt, result) => {
           setBarcode(txt);
-          alert(txt);
           history.push(`/${txt}`);
         };
         await pScannerRef.current.open();
