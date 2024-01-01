@@ -49,7 +49,7 @@ const VideoDecode = () => {
         console.log("BarcodeScanner Component Unmount");
       }
     };
-  }, []);
+  }, [setBarcode, navigate]);
 
   return (
     <div ref={elRef} className="component-barcode-scanner">
