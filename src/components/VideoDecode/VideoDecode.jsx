@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { BarcodeScanner } from "dynamsoft-javascript-barcode";
 import { BarcodeContext } from "../../BarcodeContext";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./VideoDecode.css";
 
 const VideoDecode = () => {
   const elRef = useRef(null);
   const pScannerRef = useRef(null);
   const { setBarcode } = useContext(BarcodeContext);
-  const navigate = useNavigate();
+  const history = useHistory();
 
   useEffect(() => {
     const initializeScanner = async () => {
@@ -21,7 +21,8 @@ const VideoDecode = () => {
         if (pScannerRef.current.isContextDestroyed()) return;
         pScannerRef.current.onUniqueRead = (txt, result) => {
           setBarcode(txt);
-          navigate("/");
+          alert(txt);
+          history.push(`/${txt}`);
         };
         await pScannerRef.current.open();
       } catch (ex) {
@@ -41,7 +42,7 @@ const VideoDecode = () => {
         pScannerRef.current.destroyContext();
       }
     };
-  }, [setBarcode, navigate]);
+  }, [setBarcode, history]);
 
   return (
     <div ref={elRef} className="component-barcode-scanner">

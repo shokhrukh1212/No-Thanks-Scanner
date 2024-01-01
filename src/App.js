@@ -1,20 +1,20 @@
 import { useState } from "react";
 import BarCodeReader from "./components/BarcodeReader/BarcodeReader";
-import HomePage from "./components/HomePage/HomePage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { BarcodeContext } from "./BarcodeContext";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [barcode, setBarcode] = useState(null);
 
   return (
     <BarcodeContext.Provider value={{ barcode, setBarcode }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/barcode" element={<BarCodeReader />} />
-        </Routes>
-      </BrowserRouter>
+      <Router>
+        <Switch>
+          <Route path="/">
+            <BarCodeReader />
+          </Route>
+        </Switch>
+      </Router>
     </BarcodeContext.Provider>
   );
 }
