@@ -16,7 +16,6 @@ const BarCodeReader = () => {
         if (ex.message.indexOf("network connection error") !== -1) {
           let customMsg =
             "Failed to connect to Dynamsoft License Server: network connection error. Check your Internet connection or contact Dynamsoft Support (support@dynamsoft.com) to acquire an offline license.";
-          console.log(customMsg);
           alert(customMsg);
         }
         throw ex;

@@ -19,12 +19,6 @@ const VideoDecode = () => {
         if (pScannerRef.current.isContextDestroyed()) return;
         await pScannerRef.current.setUIElement(elRef.current);
         if (pScannerRef.current.isContextDestroyed()) return;
-
-        pScannerRef.current.onFrameRead = (results) => {
-          for (let result of results) {
-            console.log(result.barcodeText);
-          }
-        };
         pScannerRef.current.onUniqueRead = (txt, result) => {
           setBarcode(txt);
           navigate("/");
@@ -34,7 +28,6 @@ const VideoDecode = () => {
         if (ex.message.indexOf("network connection error") !== -1) {
           let customMsg =
             "Failed to connect to Dynamsoft License Server: network connection error. Check your Internet connection or contact Dynamsoft Support (support@dynamsoft.com) to acquire an offline license.";
-          console.log(customMsg);
           alert(customMsg);
         }
         throw ex;
@@ -46,7 +39,6 @@ const VideoDecode = () => {
     return () => {
       if (pScannerRef.current) {
         pScannerRef.current.destroyContext();
-        console.log("BarcodeScanner Component Unmount");
       }
     };
   }, [setBarcode, navigate]);
